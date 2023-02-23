@@ -49,6 +49,7 @@ public class SplashActivity extends Form implements HandlesEventDispatching {
             return true;
         } else if (eventName.equals("Timer")) {
             if (component.equals(SplashScreenTime)) {
+                SplashScreenTime.TimerEnabled(false);
                 switchForm("MainActivity");
             }
         }

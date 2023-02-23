@@ -14,9 +14,8 @@
 
  public class GamescreenActivity extends Form implements HandlesEventDispatching {
      private
-     VerticalArrangement VerticalArrangement1;
+     VerticalArrangement Main;
      WebViewer WebGame;
-
 
      protected void $define() {
         /* this next allows the app to use the full screen.
@@ -26,6 +25,14 @@
          /* Cur seo isteach. Is cuma cén focal atá ann, níl gá leis */
          this.Sizing("Responsive");
 
+         Main = new VerticalArrangement(this);
+         Main.HeightPercent(100);
+         Main.WidthPercent(100);
+
+         WebGame = new WebViewer(Main);
+         WebGame.HeightPercent(100);
+         WebGame.WidthPercent(100);
+         WebGame.GoToUrl("https://grassworld.fachtnaroe.net/");
 
          EventDispatcher.registerEventForDelegation(this, formName, "Click");
          EventDispatcher.registerEventForDelegation(this, formName, "Timer");
