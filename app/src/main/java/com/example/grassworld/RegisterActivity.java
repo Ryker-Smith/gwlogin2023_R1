@@ -10,6 +10,7 @@ import com.google.appinventor.components.runtime.Label;
 import com.google.appinventor.components.runtime.PasswordTextBox;
 import com.google.appinventor.components.runtime.TextBox;
 import com.google.appinventor.components.runtime.VerticalArrangement;
+import com.google.appinventor.components.runtime.EventDispatcher;
 
 public class RegisterActivity extends Form implements HandlesEventDispatching {
     private
@@ -105,6 +106,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         YOBTextBox.HeightPercent(8);
         YOBTextBox.WidthPercent(50);
         YOBTextBox.FontTypeface(TYPEFACE_SERIF);
+        YOBTextBox.NumbersOnly(true);
 
         PasswordLabelArrangement = new HorizontalArrangement(AccountLabelArrangement);
 
@@ -150,11 +152,27 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         BeginButton.FontTypeface(TYPEFACE_SERIF);
         BeginButton.FontItalic(true);
 
-        //EventDispatcher.registerEventForDelegation(this, formName, "Click");
+        EventDispatcher.registerEventForDelegation(this, formName, "Click");
         //EventDispatcher.registerEventForDelegation(this, formName, "Timer");
         //EventDispatcher.registerEventForDelegation(this, formName, "GotText");
         //EventDispatcher.registerEventForDelegation(this, formName, "BackPressed");
         //EventDispatcher.registerEventForDelegation(this, formName, "OtherScreenClosed");
+    }
+    public boolean dispatchEvent(Component component, String componentName, String eventName, Object[] params) {
+
+        System.err.print("dispatchEvent: " + formName + " [" + component.toString() + "] [" + componentName + "] " + eventName);
+        if (eventName.equals("BackPressed")) {
+            // this would be a great place to do something useful
+            return true;
+        } else if (eventName.equals("Click")) {
+            if (component.equals(BeginButton)) {
+                switchForm("GamescreenActivity");
+            }
+        }
+        return false;
+    }
+    public static void dbg (String debugMsg) {
+        System.err.print( "~~~> " + debugMsg + " <~~~\n");
     }
 }
 // Here be monsters:
