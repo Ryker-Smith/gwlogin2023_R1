@@ -20,7 +20,6 @@ public class MainActivity extends Form implements HandlesEventDispatching {
     TextBox InsertEmail;
     Button CreateAnAccountButton, BeginGameButton;
     PasswordTextBox LoginPassword;
-    WebViewer WebGame;
 
     protected void $define() {
         /* this next allows the app to use the full screen.

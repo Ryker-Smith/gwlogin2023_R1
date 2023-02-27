@@ -36,7 +36,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         CreateAccountLabel.Text("CREATE YOUR OWN ACCOUNT AND REGISTER NOW!!");
         CreateAccountLabel.TextColor(COLOR_BLACK);
         CreateAccountLabel.TextAlignment(ALIGNMENT_CENTER);
-        CreateAccountLabel.HeightPercent(7);
+        CreateAccountLabel.HeightPercent(20);
         CreateAccountLabel.WidthPercent(100);
         CreateAccountLabel.FontSize(35);
         CreateAccountLabel.FontTypeface(TYPEFACE_SERIF);
@@ -53,6 +53,8 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         EmailLabel.WidthPercent(50);
         EmailLabel.FontSize(25);
         EmailLabel.FontTypeface(TYPEFACE_SERIF);
+        EmailLabel.FontBold(true);
+        EmailLabel.FontItalic(true);
 
         EmailTextBox = new TextBox(EmailArrangement);
         EmailTextBox.TextAlignment(ALIGNMENT_CENTER);
@@ -106,14 +108,16 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
 
         PasswordLabelArrangement = new HorizontalArrangement(AccountLabelArrangement);
 
-        PasswordLabel = new Label(PasswordTextboxArrangement);
+       PasswordLabel = new Label(PasswordLabelArrangement);
         PasswordLabel.Text("Enter password and retype to confirm:");
         PasswordLabel.TextColor(COLOR_BLACK);
         PasswordLabel.TextAlignment(ALIGNMENT_NORMAL);
-        PasswordLabel.HeightPercent(8);
-        PasswordLabel.WidthPercent(50);
+        PasswordLabel.HeightPercent(14);
+       PasswordLabel.WidthPercent(50);
         PasswordLabel.FontSize(25);
         PasswordLabel.FontTypeface(TYPEFACE_SERIF);
+        PasswordLabel.FontItalic(true);
+        PasswordLabel.FontBold(true);
 
         PasswordTextboxArrangement = new HorizontalArrangement(AccountLabelArrangement);
 
