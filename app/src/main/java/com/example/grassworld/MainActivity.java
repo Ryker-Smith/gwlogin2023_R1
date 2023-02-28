@@ -49,7 +49,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         LoginLabel.TextAlignment(Component.ALIGNMENT_CENTER);
         LoginLabel.TextColor(COLOR_BLACK);
         LoginLabel.FontSize(30);
-        LoginLabel.HeightPercent(5);
+        LoginLabel.HeightPercent(10);
         LoginLabel.WidthPercent(100);
         LoginLabel.FontTypeface(TYPEFACE_SERIF);
         LoginLabel.FontBold(true);
@@ -81,6 +81,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         InsertEmail.BackgroundColor(Component.COLOR_WHITE);
 
         PasswordArrangement = new HorizontalArrangement(VerticalArrangement2);
+        PasswordArrangement.HeightPercent(13);
 
         PasswordLabel = new Label(PasswordArrangement);
         PasswordLabel.Text("Password:");
