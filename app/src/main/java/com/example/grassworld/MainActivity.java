@@ -66,9 +66,10 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         EmailLabel.TextAlignment(ALIGNMENT_NORMAL);
         EmailLabel.HeightPercent(8);
         EmailLabel.WidthPercent(50);
-        EmailLabel.FontSize(25);
+        EmailLabel.FontSize(30);
         EmailLabel.FontTypeface(TYPEFACE_SERIF);
-        EmailLabel.BackgroundColor(COLOR_GRAY);
+        //EmailLabel.BackgroundColor(COLOR_GRAY);
+        EmailLabel.FontItalic(true);
 
         InsertEmail = new TextBox(EmailArrangement);
         InsertEmail.TextAlignment(ALIGNMENT_CENTER);
@@ -77,7 +78,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         InsertEmail.HeightPercent(8);
         InsertEmail.WidthPercent(50);
         InsertEmail.FontTypeface(TYPEFACE_SERIF);
-        InsertEmail.BackgroundColor(COLOR_GRAY);
+        InsertEmail.BackgroundColor(Component.COLOR_WHITE);
 
         PasswordArrangement = new HorizontalArrangement(VerticalArrangement2);
 
@@ -87,9 +88,10 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         PasswordLabel.TextAlignment(ALIGNMENT_NORMAL);
         PasswordLabel.HeightPercent(8);
         PasswordLabel.WidthPercent(50);
-        PasswordLabel.FontSize(25);
+        PasswordLabel.FontSize(30);
         PasswordLabel.FontTypeface(TYPEFACE_SERIF);
-        PasswordLabel.BackgroundColor(COLOR_GRAY);
+        //PasswordLabel.BackgroundColor(COLOR_GRAY);
+        PasswordLabel.FontItalic(true);
 
         LoginPassword = new PasswordTextBox(PasswordArrangement);
         LoginPassword.Text("");
@@ -99,10 +101,10 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         LoginPassword.WidthPercent(50);
         LoginPassword.FontSize(25);
         LoginPassword.FontTypeface(TYPEFACE_SERIF);
-        LoginPassword.BackgroundColor(COLOR_GRAY);
+        LoginPassword.BackgroundColor(COLOR_WHITE);
 
         BeginGameButton = new Button(VerticalArrangement2);
-        BeginGameButton.HeightPercent(10);
+        BeginGameButton.HeightPercent(12);
         BeginGameButton.WidthPercent(100);
         BeginGameButton.Text("BEGIN GAME!!");
         BeginGameButton.TextAlignment(ALIGNMENT_CENTER);
@@ -111,22 +113,23 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         BeginGameButton.BackgroundColor(COLOR_PINK);
         BeginGameButton.FontTypeface(TYPEFACE_SERIF);
         BeginGameButton.FontItalic(true);
+        BeginGameButton.Shape(Component.BUTTON_SHAPE_OVAL);
 
         VerticalArrangement3 = new VerticalArrangement(VerticalArrangement2);
 
         RegisterLabel = new Label(VerticalArrangement3);
-        RegisterLabel.Text("Register:");
+        RegisterLabel.Text("OR");
         RegisterLabel.TextColor(COLOR_BLACK);
         RegisterLabel.TextAlignment(ALIGNMENT_CENTER);
-        RegisterLabel.HeightPercent(10);
+        RegisterLabel.HeightPercent(8);
         RegisterLabel.WidthPercent(100);
-        RegisterLabel.FontSize(30);
+        RegisterLabel.FontSize(40);
         RegisterLabel.FontTypeface(TYPEFACE_SERIF);
         RegisterLabel.FontItalic(true);
         RegisterLabel.FontBold(true);
 
         CreateAnAccountButton = new Button(VerticalArrangement3);
-        CreateAnAccountButton.HeightPercent(10);
+        CreateAnAccountButton.HeightPercent(12);
         CreateAnAccountButton.WidthPercent(100);
         CreateAnAccountButton.Text("CREATE AN ACCOUNT!!");
         CreateAnAccountButton.TextAlignment(ALIGNMENT_CENTER);
@@ -135,6 +138,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         CreateAnAccountButton.BackgroundColor(COLOR_PINK);
         CreateAnAccountButton.FontTypeface(TYPEFACE_SERIF);
         CreateAnAccountButton.FontItalic(true);
+        CreateAnAccountButton.Shape(Component.BUTTON_SHAPE_OVAL);
 
         EventDispatcher.registerEventForDelegation(this, formName, "Click");
         EventDispatcher.registerEventForDelegation(this, formName, "Timer");

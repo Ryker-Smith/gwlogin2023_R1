@@ -39,7 +39,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         CreateAccountLabel.TextAlignment(ALIGNMENT_CENTER);
         CreateAccountLabel.HeightPercent(20);
         CreateAccountLabel.WidthPercent(100);
-        CreateAccountLabel.FontSize(35);
+        CreateAccountLabel.FontSize(32);
         CreateAccountLabel.FontTypeface(TYPEFACE_SERIF);
         CreateAccountLabel.FontBold(true);
         CreateAccountLabel.FontItalic(true);
@@ -54,7 +54,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         EmailLabel.WidthPercent(50);
         EmailLabel.FontSize(25);
         EmailLabel.FontTypeface(TYPEFACE_SERIF);
-        EmailLabel.FontBold(true);
+        //EmailLabel.FontBold(true);
         EmailLabel.FontItalic(true);
 
         EmailTextBox = new TextBox(EmailArrangement);
@@ -64,6 +64,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         EmailTextBox.HeightPercent(8);
         EmailTextBox.WidthPercent(50);
         EmailTextBox.FontTypeface(TYPEFACE_SERIF);
+        EmailTextBox.BackgroundColor(Component.COLOR_WHITE);
 
         NameArrangement = new HorizontalArrangement(AccountLabelArrangement);
         
@@ -75,7 +76,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         NameLabel.HeightPercent(8);
         NameLabel.WidthPercent(50);
         NameLabel.FontTypeface(TYPEFACE_SERIF);
-        NameLabel.FontBold(true);
+        //NameLabel.FontBold(true);
         NameLabel.FontItalic(true);
        
         NameTextBox = new TextBox(NameArrangement);
@@ -85,6 +86,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         NameTextBox.HeightPercent(8);
         NameTextBox.WidthPercent(50);
         NameTextBox.FontTypeface(TYPEFACE_SERIF);
+        NameTextBox.BackgroundColor(Component.COLOR_WHITE);
 
         YOBArrangement = new HorizontalArrangement(AccountLabelArrangement);
 
@@ -97,7 +99,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         YOBLabel.FontSize(25);
         YOBLabel.FontTypeface(TYPEFACE_SERIF);
         YOBLabel.FontItalic(true);
-        YOBLabel.FontBold(true);
+        //YOBLabel.FontBold(true);
 
         YOBTextBox = new TextBox(YOBArrangement);
         YOBTextBox.TextAlignment(ALIGNMENT_CENTER);
@@ -107,6 +109,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         YOBTextBox.WidthPercent(50);
         YOBTextBox.FontTypeface(TYPEFACE_SERIF);
         YOBTextBox.NumbersOnly(true);
+        YOBTextBox.BackgroundColor(Component.COLOR_WHITE);
 
         PasswordLabelArrangement = new HorizontalArrangement(AccountLabelArrangement);
 
@@ -114,12 +117,12 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         PasswordLabel.Text("Enter password and retype to confirm:");
         PasswordLabel.TextColor(COLOR_BLACK);
         PasswordLabel.TextAlignment(ALIGNMENT_NORMAL);
-        PasswordLabel.HeightPercent(14);
+        PasswordLabel.HeightPercent(19);
        PasswordLabel.WidthPercent(50);
         PasswordLabel.FontSize(25);
         PasswordLabel.FontTypeface(TYPEFACE_SERIF);
         PasswordLabel.FontItalic(true);
-        PasswordLabel.FontBold(true);
+        //PasswordLabel.FontBold(true);
 
         PasswordTextboxArrangement = new HorizontalArrangement(AccountLabelArrangement);
 
@@ -131,6 +134,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         PasswordTextBox1.WidthPercent(50);
         PasswordTextBox1.FontSize(25);
         PasswordTextBox1.FontTypeface(TYPEFACE_SERIF);
+        PasswordTextBox1.BackgroundColor(Component.COLOR_WHITE);
 
         PasswordTextBox2 = new PasswordTextBox(PasswordTextboxArrangement);
         PasswordTextBox2.Text("");
@@ -140,6 +144,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         PasswordTextBox2.WidthPercent(50);
         PasswordTextBox2.FontSize(25);
         PasswordTextBox2.FontTypeface(TYPEFACE_SERIF);
+        PasswordTextBox2.BackgroundColor(Component.COLOR_WHITE);
 
         BeginButton = new Button(AccountLabelArrangement);
         BeginButton.HeightPercent(10);
@@ -151,6 +156,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         BeginButton.BackgroundColor(COLOR_PINK);
         BeginButton.FontTypeface(TYPEFACE_SERIF);
         BeginButton.FontItalic(true);
+        BeginButton.Shape(Component.BUTTON_SHAPE_OVAL);
 
         EventDispatcher.registerEventForDelegation(this, formName, "Click");
         //EventDispatcher.registerEventForDelegation(this, formName, "Timer");
