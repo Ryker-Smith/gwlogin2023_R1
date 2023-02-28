@@ -10,7 +10,10 @@ import com.google.appinventor.components.runtime.PasswordTextBox;
 import com.google.appinventor.components.runtime.TextBox;
 import com.google.appinventor.components.runtime.VerticalArrangement;
 import com.google.appinventor.components.runtime.EventDispatcher;
+import com.google.appinventor.components.runtime.Web;
 import com.google.appinventor.components.runtime.WebViewer;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends Form implements HandlesEventDispatching {
     private
@@ -20,6 +23,8 @@ public class MainActivity extends Form implements HandlesEventDispatching {
     TextBox InsertEmail;
     Button CreateAnAccountButton, BeginGameButton;
     PasswordTextBox LoginPassword;
+    JSONObject jsonLoginInfo = new JSONObject();
+    Web WebAuthenticate;
 
     protected void $define() {
         /* this next allows the app to use the full screen.
@@ -149,25 +154,45 @@ public class MainActivity extends Form implements HandlesEventDispatching {
     }
 
     public boolean dispatchEvent(Component component, String componentName, String eventName, Object[] params) {
-
         System.err.print("dispatchEvent: " + formName + " [" + component.toString() + "] [" + componentName + "] " + eventName);
         if (eventName.equals("BackPressed")) {
             // this would be a great place to do something useful
             return true;
+            
         } else if (eventName.equals("Click")) {
             if (component.equals(BeginGameButton)) {
-                switchForm("GamescreenActivity");
+                System.err.print("You pressed a button");
+                try {
+                    jsonLoginInfo.put("action", "login");
+                    jsonLoginInfo.put("user", InsertEmail.Text());
+                    jsonLoginInfo.put("password", LoginPassword.Text());
+                    String msg = jsonLoginInfo.toString();
+                    WebAuthenticate.PostText(msg);
+                } catch (Exception e) {
+                    return false;
+                }
+                return true;
+            } else if (component.equals(CreateAnAccountButton)) {
+                switchForm("RegistrationScreen");
             }
-            else if (component.equals(CreateAnAccountButton)) {
-                switchForm("RegisterActivity");
+        } else if (eventName.equals("GotText")) {
+            if (component.equals(WebAuthenticate)) {
+                String status = params[1].toString();
+                String textOfResponse = (String) params[3];
+                if (textOfResponse.equals("")) {
+                    textOfResponse = status;
+                } else if (eventName.equals("Click")) {
+                    if (component.equals(BeginGameButton)) {
+                        switchForm("GamescreenActivity");
+                    } else if (component.equals(CreateAnAccountButton)) {
+                        switchForm("RegisterActivity");
+                    }
+                }
+                return false;
             }
         }
         return false;
-    }
-    public static void dbg (String debugMsg) {
-        System.err.print( "~~~> " + debugMsg + " <~~~\n");
-    }
-}
+    }}
             // this would be a great place to do something useful
 //
 // Here be monsters:
