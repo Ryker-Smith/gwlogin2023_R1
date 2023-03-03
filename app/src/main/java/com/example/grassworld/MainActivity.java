@@ -181,19 +181,32 @@ public class MainActivity extends Form implements HandlesEventDispatching {
                 String textOfResponse = (String) params[3];
                 if (textOfResponse.equals("")) {
                     textOfResponse = status;
-                } else if (eventName.equals("Click")) {
-                    if (component.equals(BeginGameButton)) {
-                        switchForm("GamescreenActivity");
-                    } else if (component.equals(CreateAnAccountButton)) {
-                        switchForm("RegisterActivity");
+                }
+                if (status.equals("200")) {
+                    try {
+                        JSONObject parser = new JSONObject(textOfResponse);
+                        if (parser.getString("status").equals("error")) {
+                            BeginGameButton.Text(parser.getString("detail"));
+                            BeginGameButton.Enabled(true);
+                        }
+                    }
+                    catch (JSONException e){
+                        BeginGameButton.Text("error e177 processing response");
+                        BeginGameButton.Enabled(true);
                     }
                 }
-                return false;
+                else{
+                    BeginGameButton.Text("error e182 processing response"+status);
+                    BeginGameButton.Enabled(true);
+                }
             }
         }
+        // true means event has been handled by us (ie recognised)
         return false;
-    }}
-            // this would be a great place to do something useful
+    }
+
+}
+// this would be a great place to do something useful
 //
 // Here be monsters:
 // put unwanted code here, or experimental code awaiting placement
