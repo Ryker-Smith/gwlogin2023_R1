@@ -176,6 +176,12 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         } else if (eventName.equals("Click")) {
             if (component.equals(BeginGameButton)) {
                 System.err.print("You pressed a button");
+                if (InsertEmail.Text().length()>5) {
+                    BeginGameButton.Text("Bad email :(");
+                }
+                if (LoginPassword.Text().length()>2) {
+                    BeginGameButton.Text("Bad password :(");
+                }
                 try {
                     jsonLoginInfo.put("action", "login");
                     dbg(InsertEmail.Text());
@@ -206,6 +212,11 @@ public class MainActivity extends Form implements HandlesEventDispatching {
                         if (parser.getString("status").equals("error")) {
                             BeginGameButton.Text(parser.getString("detail"));
                             BeginGameButton.Enabled(true);
+                        }
+                        else {
+                            String token = parser.getString("token");
+                            BeginGameButton.Text("Login work!");
+                            switchForm("GamescreenActivity");
                         }
                     }
                     catch (JSONException e){
