@@ -16,6 +16,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends Form implements HandlesEventDispatching {
+
+    public static final String URL_LOGIN = "https://grassworld.fachtnaroe.net/auth/";
+    public static final String forTesting_User="lola.davern22@student.tcfe.ie";
+    public static final String forTesting_Pass="t3mp0rary";
+    public static final boolean TESTING=true;
+    public static final String URL_MAIN="https://grassworld.fachtnaroe.net/";
+    public static final Integer SplashTimeOut=1000;
+    // the buildNumber can be generated automatically. Look in build.gradle to see how
+    public final String buildNumber=Integer.toString(BuildConfig.VERSION_CODE);
+    //    public final String versionName=BuildConfig.VERSION_NAME;
+
     private
     VerticalArrangement Main, VerticalArrangement2, VerticalArrangement3;
     HorizontalArrangement EmailArrangement, PasswordArrangement, HorizontalArrangement3;
@@ -146,6 +157,9 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         CreateAnAccountButton.FontItalic(true);
         CreateAnAccountButton.Shape(Component.BUTTON_SHAPE_OVAL);
 
+        WebAuthenticate = new Web(this);
+        WebAuthenticate.Url("https://grassworld.fachtnaroe.net/auth/");
+
         EventDispatcher.registerEventForDelegation(this, formName, "Click");
         EventDispatcher.registerEventForDelegation(this, formName, "Timer");
         EventDispatcher.registerEventForDelegation(this, formName, "GotText");
@@ -164,11 +178,15 @@ public class MainActivity extends Form implements HandlesEventDispatching {
                 System.err.print("You pressed a button");
                 try {
                     jsonLoginInfo.put("action", "login");
+                    dbg(InsertEmail.Text());
                     jsonLoginInfo.put("user", InsertEmail.Text());
+                    dbg(LoginPassword.Text());
                     jsonLoginInfo.put("password", LoginPassword.Text());
                     String msg = jsonLoginInfo.toString();
                     WebAuthenticate.PostText(msg);
                 } catch (Exception e) {
+                    dbg(e.toString());
+                    dbg("error 172");
                     return false;
                 }
                 return true;
@@ -197,12 +215,16 @@ public class MainActivity extends Form implements HandlesEventDispatching {
                 }
                 else{
                     BeginGameButton.Text("error e182 processing response"+status);
+                    dbg(status);
                     BeginGameButton.Enabled(true);
                 }
             }
         }
         // true means event has been handled by us (ie recognised)
         return false;
+    }
+    public static void dbg (String debugMsg) {
+        System.err.print( "~~~> " + debugMsg + " <~~~\n\n");
     }
 
 }
