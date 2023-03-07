@@ -40,7 +40,7 @@
          WebGame.GoToUrl("https://grassworld.fachtnaroe.net/");
 
          ColourTable = new VerticalArrangement(this);
-         ColourTable.BackgroundColor(COLOR_MAGENTA);
+         ColourTable.BackgroundColor(Colours.GameColour);
          ColourTable.WidthPercent(100);
          ColourTable.Height(Component.LENGTH_FILL_PARENT);
 
