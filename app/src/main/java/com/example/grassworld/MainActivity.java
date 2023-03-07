@@ -30,7 +30,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
     private
     VerticalArrangement Main, VerticalArrangement2, VerticalArrangement3;
     HorizontalArrangement EmailArrangement, PasswordArrangement, HorizontalArrangement3;
-    Label GrassworldLabel, LoginLabel, PasswordLabel, EmailLabel, RegisterLabel;
+    Label GrassworldLabel, LoginLabel, PasswordLabel, EmailLabel, RegisterLabel, LeftArrangementLabel, RightArrangementLabel, LeftArrangementLabel2, RightArrangementLabel2;
     TextBox InsertEmail;
     Button CreateAnAccountButton, BeginGameButton;
     PasswordTextBox LoginPassword;
@@ -92,9 +92,9 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         InsertEmail.Text("");
         InsertEmail.FontSize(25);
         InsertEmail.HeightPercent(8);
-        InsertEmail.WidthPercent(50);
+        InsertEmail.WidthPercent(48);
         InsertEmail.FontTypeface(TYPEFACE_SERIF);
-        InsertEmail.BackgroundColor(Component.COLOR_WHITE);
+        InsertEmail.BackgroundColor(Colours.TextBoxColour);
 
         PasswordArrangement = new HorizontalArrangement(VerticalArrangement2);
         PasswordArrangement.HeightPercent(13);
@@ -115,22 +115,40 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         LoginPassword.TextColor(COLOR_BLACK);
         LoginPassword.TextAlignment(ALIGNMENT_CENTER);
         LoginPassword.HeightPercent(8);
-        LoginPassword.WidthPercent(50);
+        LoginPassword.WidthPercent(48);
         LoginPassword.FontSize(25);
         LoginPassword.FontTypeface(TYPEFACE_SERIF);
-        LoginPassword.BackgroundColor(COLOR_WHITE);
+        LoginPassword.BackgroundColor(Colours.TextBoxColour);
 
-        BeginGameButton = new Button(VerticalArrangement2);
+        HorizontalArrangement3 = new HorizontalArrangement(VerticalArrangement2);
+        
+        LeftArrangementLabel = new Label(HorizontalArrangement3);
+        LeftArrangementLabel.Text(" ");
+        LeftArrangementLabel.TextAlignment(ALIGNMENT_NORMAL);
+        LeftArrangementLabel.HeightPercent(9);
+        LeftArrangementLabel.WidthPercent(15);
+        //LeftArrangementLabel.BackgroundColor(Component.COLOR_BLUE);
+        LeftArrangementLabel.FontSize(25);
+        
+        BeginGameButton = new Button(HorizontalArrangement3);
         BeginGameButton.HeightPercent(12);
-        BeginGameButton.WidthPercent(100);
+        BeginGameButton.WidthPercent(70);
         BeginGameButton.Text("BEGIN GAME!!");
         BeginGameButton.TextAlignment(ALIGNMENT_CENTER);
         BeginGameButton.TextColor(COLOR_BLACK);
         BeginGameButton.FontSize(30);
-        BeginGameButton.BackgroundColor(COLOR_PINK);
+        BeginGameButton.BackgroundColor(Colours.ButtonsColour);
         BeginGameButton.FontTypeface(TYPEFACE_SERIF);
         BeginGameButton.FontItalic(true);
         BeginGameButton.Shape(Component.BUTTON_SHAPE_OVAL);
+
+        RightArrangementLabel = new Label(HorizontalArrangement3);
+        RightArrangementLabel.Text(" ");
+        RightArrangementLabel.TextAlignment(ALIGNMENT_NORMAL);
+        //RightArrangementLabel.BackgroundColor(Component.COLOR_RED);
+        RightArrangementLabel.HeightPercent(9);
+        RightArrangementLabel.WidthPercent(15);
+        RightArrangementLabel.FontSize(25);
 
         VerticalArrangement3 = new VerticalArrangement(VerticalArrangement2);
 
@@ -145,17 +163,35 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         RegisterLabel.FontItalic(true);
         RegisterLabel.FontBold(true);
 
-        CreateAnAccountButton = new Button(VerticalArrangement3);
-        CreateAnAccountButton.HeightPercent(12);
-        CreateAnAccountButton.WidthPercent(100);
+        HorizontalArrangement3 = new HorizontalArrangement(VerticalArrangement3);
+
+        LeftArrangementLabel2 = new Label(HorizontalArrangement3);
+        LeftArrangementLabel2.Text(" ");
+        LeftArrangementLabel2.TextAlignment(ALIGNMENT_NORMAL);
+        LeftArrangementLabel2.HeightPercent(9);
+        LeftArrangementLabel2.WidthPercent(15);
+        //LeftArrangementLabel2.BackgroundColor(Component.COLOR_BLUE);
+        LeftArrangementLabel2.FontSize(25);
+
+        CreateAnAccountButton = new Button(HorizontalArrangement3);
+        CreateAnAccountButton.HeightPercent(13);
+        CreateAnAccountButton.WidthPercent(70);
         CreateAnAccountButton.Text("CREATE AN ACCOUNT!!");
         CreateAnAccountButton.TextAlignment(ALIGNMENT_CENTER);
         CreateAnAccountButton.TextColor(COLOR_BLACK);
         CreateAnAccountButton.FontSize(30);
-        CreateAnAccountButton.BackgroundColor(COLOR_PINK);
+        CreateAnAccountButton.BackgroundColor(Colours.ButtonsColour);
         CreateAnAccountButton.FontTypeface(TYPEFACE_SERIF);
         CreateAnAccountButton.FontItalic(true);
         CreateAnAccountButton.Shape(Component.BUTTON_SHAPE_OVAL);
+
+        RightArrangementLabel2 = new Label(HorizontalArrangement3);
+        RightArrangementLabel2.Text(" ");
+        RightArrangementLabel2.TextAlignment(ALIGNMENT_NORMAL);
+        //RightArrangementLabel2.BackgroundColor(Component.COLOR_RED);
+        RightArrangementLabel2.HeightPercent(9);
+        RightArrangementLabel2.WidthPercent(15);
+        RightArrangementLabel2.FontSize(25);
 
         WebAuthenticate = new Web(this);
         WebAuthenticate.Url("https://grassworld.fachtnaroe.net/auth/");

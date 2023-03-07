@@ -15,7 +15,7 @@ import com.google.appinventor.components.runtime.EventDispatcher;
 public class RegisterActivity extends Form implements HandlesEventDispatching {
     private
     VerticalArrangement AccountLabelArrangement, PasswordTextBoxArrangementArrangement;
-    HorizontalArrangement EmailArrangement, PasswordTextboxArrangement, NameArrangement, YOBArrangement, PasswordLabelArrangement;
+    HorizontalArrangement EmailArrangement, PasswordTextBoxArrangement, NameArrangement, YOBArrangement, PasswordLabelArrangement;
     Label CreateAccountLabel, NameLabel, PasswordLabel, EmailLabel, YOBLabel, LeftArrangementLabel, RightArrangementLabel;
     TextBox EmailTextBox, NameTextBox, YOBTextBox;
     Button BeginButton;
@@ -51,49 +51,49 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         EmailLabel.TextColor(COLOR_BLACK);
         EmailLabel.TextAlignment(ALIGNMENT_NORMAL);
         EmailLabel.HeightPercent(8);
-        EmailLabel.WidthPercent(50);
+        EmailLabel.WidthPercent(40);
         EmailLabel.FontSize(25);
         EmailLabel.FontTypeface(TYPEFACE_SERIF);
         //EmailLabel.FontBold(true);
         EmailLabel.FontItalic(true);
 
         EmailTextBox = new TextBox(EmailArrangement);
-        EmailTextBox.TextAlignment(ALIGNMENT_CENTER);
+        EmailTextBox.TextAlignment(ALIGNMENT_NORMAL);
         EmailTextBox.Text("");
         EmailTextBox.FontSize(25);
         EmailTextBox.HeightPercent(8);
-        EmailTextBox.WidthPercent(48);
+        EmailTextBox.WidthPercent(55);
         EmailTextBox.FontTypeface(TYPEFACE_SERIF);
-        EmailTextBox.BackgroundColor(Component.COLOR_WHITE);
+        EmailTextBox.BackgroundColor(Colours.TextBoxColour);
 
         NameArrangement = new HorizontalArrangement(AccountLabelArrangement);
         
         NameLabel = new Label(NameArrangement);
         NameLabel.Text("Enter name:");
-        NameLabel.TextAlignment(Component.ALIGNMENT_CENTER);
+        NameLabel.TextAlignment(Component.ALIGNMENT_NORMAL);
         NameLabel.TextColor(COLOR_BLACK);
         NameLabel.FontSize(25);
         NameLabel.HeightPercent(8);
-        NameLabel.WidthPercent(50);
+        NameLabel.WidthPercent(40);
         NameLabel.FontTypeface(TYPEFACE_SERIF);
         //NameLabel.FontBold(true);
         NameLabel.FontItalic(true);
        
         NameTextBox = new TextBox(NameArrangement);
-        NameTextBox.TextAlignment(ALIGNMENT_CENTER);
+        NameTextBox.TextAlignment(ALIGNMENT_NORMAL);
         NameTextBox.Text("");
         NameTextBox.FontSize(25);
         NameTextBox.HeightPercent(8);
-        NameTextBox.WidthPercent(48);
+        NameTextBox.WidthPercent(55);
         NameTextBox.FontTypeface(TYPEFACE_SERIF);
-        NameTextBox.BackgroundColor(Component.COLOR_WHITE);
+        NameTextBox.BackgroundColor(Colours.TextBoxColour);
 
         YOBArrangement = new HorizontalArrangement(AccountLabelArrangement);
 
         YOBLabel = new Label(YOBArrangement);
         YOBLabel.Text("Enter year of birth: (player must be over 18 to play)");
         YOBLabel.TextColor(COLOR_BLACK);
-        YOBLabel.TextAlignment(ALIGNMENT_CENTER);
+        YOBLabel.TextAlignment(ALIGNMENT_NORMAL);
         YOBLabel.HeightPercent(13);
         YOBLabel.WidthPercent(70);
         YOBLabel.FontSize(25);
@@ -102,14 +102,14 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         //YOBLabel.FontBold(true);
 
         YOBTextBox = new TextBox(YOBArrangement);
-        YOBTextBox.TextAlignment(ALIGNMENT_CENTER);
+        YOBTextBox.TextAlignment(Component.ALIGNMENT_CENTER);
         YOBTextBox.Text("");
         YOBTextBox.FontSize(25);
-        YOBTextBox.HeightPercent(8);
+        YOBTextBox.HeightPercent(10);
         YOBTextBox.WidthPercent(28);
         YOBTextBox.FontTypeface(TYPEFACE_SERIF);
         YOBTextBox.NumbersOnly(true);
-        YOBTextBox.BackgroundColor(Component.COLOR_WHITE);
+        YOBTextBox.BackgroundColor(Colours.TextBoxColour);
 
         PasswordLabelArrangement = new HorizontalArrangement(AccountLabelArrangement);
 
@@ -125,52 +125,53 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         //PasswordLabel.FontBold(true);
 
 
-        //PasswordTextBoxArrangementArrangement.BackgroundColor(Component.COLOR_BLUE);
+        // CRASHES WITH THIS ~~> PasswordTextBoxArrangementArrangement.BackgroundColor(Component.COLOR_BLUE);
         PasswordTextBoxArrangementArrangement = new VerticalArrangement(AccountLabelArrangement);
-        PasswordTextboxArrangement = new HorizontalArrangement(PasswordTextBoxArrangementArrangement);
-        PasswordTextboxArrangement.WidthPercent(20);
-        // horizonal arrangement: label/textbox/label
 
-        LeftArrangementLabel = new Label(PasswordTextboxArrangement);
+        PasswordTextBoxArrangement = new HorizontalArrangement(PasswordTextBoxArrangementArrangement);
+        PasswordTextBoxArrangement.WidthPercent(100);
+        // horizonal arrangement: label1/textbox/label2
+
+        LeftArrangementLabel = new Label(PasswordTextBoxArrangement);
         LeftArrangementLabel.Text(" ");
         LeftArrangementLabel.TextAlignment(ALIGNMENT_NORMAL);
         LeftArrangementLabel.HeightPercent(9);
-        LeftArrangementLabel.WidthPercent(25);
-        LeftArrangementLabel.BackgroundColor(Component.COLOR_BLUE);
+        LeftArrangementLabel.WidthPercent(15);
+       //LeftArrangementLabel.BackgroundColor(Component.COLOR_BLUE);
         LeftArrangementLabel.FontSize(25);
         
-        PasswordTextBox1 = new PasswordTextBox(PasswordTextBoxArrangementArrangement);
+        PasswordTextBox1 = new PasswordTextBox(PasswordTextBoxArrangement);
         PasswordTextBox1.Text("");
-        //PasswordTextBox1.
         PasswordTextBox1.TextColor(COLOR_BLACK);
-        PasswordTextBox1.TextAlignment(ALIGNMENT_CENTER);
+        PasswordTextBox1.TextAlignment(ALIGNMENT_NORMAL);
         PasswordTextBox1.HeightPercent(9);
-        PasswordTextBox1.Width(LENGTH_FILL_PARENT);
+        PasswordTextBox1.WidthPercent(70);
         PasswordTextBox1.FontSize(25);
         PasswordTextBox1.FontTypeface(TYPEFACE_SERIF);
-        PasswordTextBox1.BackgroundColor(COLOR_WHITE);
+        PasswordTextBox1.BackgroundColor(Colours.TextBoxColour);
        
-        RightArrangementLabel = new Label(PasswordTextboxArrangement);
+        RightArrangementLabel = new Label(PasswordTextBoxArrangement);
         RightArrangementLabel.Text(" ");
         RightArrangementLabel.TextAlignment(ALIGNMENT_NORMAL);
-        RightArrangementLabel.BackgroundColor(Component.COLOR_RED);
+        //RightArrangementLabel.BackgroundColor(Component.COLOR_RED);
         RightArrangementLabel.HeightPercent(9);
-        RightArrangementLabel.WidthPercent(25);
+        RightArrangementLabel.WidthPercent(15);
         RightArrangementLabel.FontSize(25);
 
-        //PasswordTextBox2 = new PasswordTextBox(PasswordTextboxArrangement);
-        //PasswordTextBox2.Text("");
-        //PasswordTextBox2.TextColor(COLOR_BLACK);
-       // PasswordTextBox2.TextAlignment(ALIGNMENT_CENTER);
-       // PasswordTextBox2.HeightPercent(8);
-       // PasswordTextBox2.WidthPercent(50);
-      //  PasswordTextBox2.FontSize(25);
-      //  PasswordTextBox2.FontTypeface(TYPEFACE_SERIF);
-      //  PasswordTextBox2.BackgroundColor(Component.COLOR_WHITE);
+        PasswordTextBoxArrangement = new HorizontalArrangement(PasswordTextBoxArrangementArrangement);
+        PasswordTextBoxArrangement.WidthPercent(100);
 
-        BeginButton = new Button(AccountLabelArrangement);
+        LeftArrangementLabel = new Label(PasswordTextBoxArrangement);
+        LeftArrangementLabel.Text(" ");
+        LeftArrangementLabel.TextAlignment(ALIGNMENT_NORMAL);
+        LeftArrangementLabel.HeightPercent(9);
+        LeftArrangementLabel.WidthPercent(13);
+        //LeftArrangementLabel.BackgroundColor(Component.COLOR_BLUE);
+        LeftArrangementLabel.FontSize(25);
+
+        BeginButton = new Button(PasswordTextBoxArrangement);
         BeginButton.HeightPercent(10);
-        BeginButton.WidthPercent(100);
+        BeginButton.WidthPercent(75);
         BeginButton.Text("JOIN GAME!!");
         BeginButton.TextAlignment(ALIGNMENT_CENTER);
         BeginButton.TextColor(COLOR_BLACK);
@@ -179,6 +180,14 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         BeginButton.FontTypeface(TYPEFACE_SERIF);
         BeginButton.FontItalic(true);
         BeginButton.Shape(Component.BUTTON_SHAPE_OVAL);
+
+        RightArrangementLabel = new Label(PasswordTextBoxArrangement);
+        RightArrangementLabel.Text(" ");
+        RightArrangementLabel.TextAlignment(ALIGNMENT_NORMAL);
+       // RightArrangementLabel.BackgroundColor(Component.COLOR_RED);
+        RightArrangementLabel.HeightPercent(9);
+        RightArrangementLabel.WidthPercent(13);
+        RightArrangementLabel.FontSize(25);
 
         EventDispatcher.registerEventForDelegation(this, formName, "Click");
         //EventDispatcher.registerEventForDelegation(this, formName, "Timer");
