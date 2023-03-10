@@ -232,10 +232,13 @@ public class MainActivity extends Form implements HandlesEventDispatching {
                     return false;
                 }
                 return true;
-            } else if (component.equals(CreateAnAccountButton)) {
-                switchForm("RegisterActivity");
             }
-        } else if (eventName.equals("GotText")) {
+            else if (component.equals(CreateAnAccountButton)) {
+                switchForm("RegisterActivity");
+                return true;
+            }
+        }
+        else if (eventName.equals("GotText")) {
             if (component.equals(WebAuthenticate)) {
                 String status = params[1].toString();
                 String textOfResponse = (String) params[3];
@@ -249,10 +252,10 @@ public class MainActivity extends Form implements HandlesEventDispatching {
                             BeginGameButton.Text(parser.getString("detail"));
                             BeginGameButton.Enabled(true);
                             if (parser.getString("detail").equals("unknown")) {
-                            BeginGameButton.Text("Incorrect Email!");
+                                BeginGameButton.Text("Incorrect Email!");
                             }
-                            if (parser.getString("detail").equals("bad login")) {
-                            BeginGameButton.Text("Incorrect password!");
+                            else if (parser.getString("detail").equals("bad login")) {
+                                BeginGameButton.Text("Incorrect password!");
                             }
                         }
                         else {
