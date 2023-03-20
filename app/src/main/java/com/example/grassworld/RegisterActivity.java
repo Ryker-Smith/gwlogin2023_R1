@@ -11,7 +11,8 @@ import com.google.appinventor.components.runtime.PasswordTextBox;
 import com.google.appinventor.components.runtime.TextBox;
 import com.google.appinventor.components.runtime.VerticalArrangement;
 import com.google.appinventor.components.runtime.EventDispatcher;
-
+import org.json.JSONException;
+import org.json.JSONObject;
 public class RegisterActivity extends Form implements HandlesEventDispatching {
     private
     VerticalArrangement AccountLabelArrangement, PasswordTextBoxArrangementArrangement;
@@ -19,7 +20,9 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
     Label CreateAccountLabel, NameLabel, PasswordLabel, EmailLabel, YOBLabel, LeftArrangementLabel, RightArrangementLabel;
     TextBox EmailTextBox, NameTextBox, YOBTextBox;
     Button BeginButton;
-    PasswordTextBox PasswordTextBox1, PasswordTextBox2;
+    PasswordTextBox PasswordTextBox1;
+    JSONObject jsonCredentials = new JSONObject();
+    Integer AgeLimit = 2004;
 
     protected void $define() {
         /* this next allows the app to use the full screen.
@@ -45,7 +48,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         CreateAccountLabel.FontItalic(true);
 
         EmailArrangement = new HorizontalArrangement(AccountLabelArrangement);
-        
+
         EmailLabel = new Label(EmailArrangement);
         EmailLabel.Text("Enter valid email:");
         EmailLabel.TextColor(COLOR_BLACK);
@@ -67,7 +70,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         EmailTextBox.BackgroundColor(Colours.TextBoxColour);
 
         NameArrangement = new HorizontalArrangement(AccountLabelArrangement);
-        
+
         NameLabel = new Label(NameArrangement);
         NameLabel.Text("Enter name:");
         NameLabel.TextAlignment(Component.ALIGNMENT_NORMAL);
@@ -78,7 +81,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         NameLabel.FontTypeface(TYPEFACE_SERIF);
         //NameLabel.FontBold(true);
         NameLabel.FontItalic(true);
-       
+
         NameTextBox = new TextBox(NameArrangement);
         NameTextBox.TextAlignment(ALIGNMENT_NORMAL);
         NameTextBox.Text("");
@@ -113,12 +116,12 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
 
         PasswordLabelArrangement = new HorizontalArrangement(AccountLabelArrangement);
 
-       PasswordLabel = new Label(PasswordLabelArrangement);
+        PasswordLabel = new Label(PasswordLabelArrangement);
         PasswordLabel.Text("Enter password: (must be a min. of 8 characters)");
         PasswordLabel.TextColor(COLOR_BLACK);
         PasswordLabel.TextAlignment(ALIGNMENT_NORMAL);
         PasswordLabel.HeightPercent(10);
-       PasswordLabel.WidthPercent(100);
+        PasswordLabel.WidthPercent(100);
         PasswordLabel.FontSize(25);
         PasswordLabel.FontTypeface(TYPEFACE_SERIF);
         PasswordLabel.FontItalic(true);
@@ -137,9 +140,9 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         LeftArrangementLabel.TextAlignment(ALIGNMENT_NORMAL);
         LeftArrangementLabel.HeightPercent(9);
         LeftArrangementLabel.WidthPercent(15);
-       //LeftArrangementLabel.BackgroundColor(Component.COLOR_BLUE);
+        //LeftArrangementLabel.BackgroundColor(Component.COLOR_BLUE);
         LeftArrangementLabel.FontSize(25);
-        
+
         PasswordTextBox1 = new PasswordTextBox(PasswordTextBoxArrangement);
         PasswordTextBox1.Text("");
         PasswordTextBox1.TextColor(COLOR_BLACK);
@@ -149,7 +152,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         PasswordTextBox1.FontSize(25);
         PasswordTextBox1.FontTypeface(TYPEFACE_SERIF);
         PasswordTextBox1.BackgroundColor(Colours.TextBoxColour);
-       
+
         RightArrangementLabel = new Label(PasswordTextBoxArrangement);
         RightArrangementLabel.Text(" ");
         RightArrangementLabel.TextAlignment(ALIGNMENT_NORMAL);
@@ -184,17 +187,18 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         RightArrangementLabel = new Label(PasswordTextBoxArrangement);
         RightArrangementLabel.Text(" ");
         RightArrangementLabel.TextAlignment(ALIGNMENT_NORMAL);
-       // RightArrangementLabel.BackgroundColor(Component.COLOR_RED);
+        // RightArrangementLabel.BackgroundColor(Component.COLOR_RED);
         RightArrangementLabel.HeightPercent(9);
         RightArrangementLabel.WidthPercent(13);
         RightArrangementLabel.FontSize(25);
 
         EventDispatcher.registerEventForDelegation(this, formName, "Click");
-        //EventDispatcher.registerEventForDelegation(this, formName, "Timer");
-        //EventDispatcher.registerEventForDelegation(this, formName, "GotText");
-        //EventDispatcher.registerEventForDelegation(this, formName, "BackPressed");
-        //EventDispatcher.registerEventForDelegation(this, formName, "OtherScreenClosed");
+        EventDispatcher.registerEventForDelegation(this, formName, "Timer");
+        EventDispatcher.registerEventForDelegation(this, formName, "GotText");
+        EventDispatcher.registerEventForDelegation(this, formName, "BackPressed");
+        EventDispatcher.registerEventForDelegation(this, formName, "OtherScreenClosed");
     }
+
     public boolean dispatchEvent(Component component, String componentName, String eventName, Object[] params) {
 
         System.err.print("dispatchEvent: " + formName + " [" + component.toString() + "] [" + componentName + "] " + eventName);
@@ -203,15 +207,38 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
             return true;
         } else if (eventName.equals("Click")) {
             if (component.equals(BeginButton)) {
-                switchForm("GamescreenActivity");
+                if (Integer.valueOf(YOBTextBox.Text())<AgeLimit) {
+                    BeginButton.Text("You are too young to play this game :(");
+                } else if (Integer.valueOf(YOBTextBox.Text()) >AgeLimit) {
+                    if (EmailTextBox.Text().contains("@")) {
+                        try {
+                            jsonCredentials.put("action", "validate");
+                            jsonCredentials.put("user", EmailTextBox.Text());
+                            System.err.print("Sending: " + jsonCredentials.toString());
+                            String msg = jsonCredentials.toString();
+                        } catch (Exception e) {
+                            return false;
+                        }
+                    }
+                } else {
+                    BeginButton.Text("Enter a more secure password!");
+                }
             }
+        }
+        {
+            BeginButton.Text("Enter a valid email!");
+        }
+        {
+            BeginButton.Text("Please enter a valid year of birth!");
         }
         return false;
     }
-    public static void dbg (String debugMsg) {
-        System.err.print( "~~~> " + debugMsg + " <~~~\n");
-    }
 }
+
+//    public static void dbg (String debugMsg) {
+//        System.err.print( "~~~> " + debugMsg + " <~~~\n");
+ //   }
+//}
 // Here be monsters:
 // put unwanted code here, or experimental code awaiting placement
 // https://fachtnaroe.net/qndPasswordLabeldevice=&sensor=CELCIUS
