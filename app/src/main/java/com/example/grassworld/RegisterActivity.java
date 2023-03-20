@@ -3,6 +3,7 @@ package com.example.grassworld;
 
 import com.google.appinventor.components.runtime.Button;
 import com.google.appinventor.components.runtime.Component;
+import com.google.appinventor.components.runtime.EventDispatcher;
 import com.google.appinventor.components.runtime.Form;
 import com.google.appinventor.components.runtime.HandlesEventDispatching;
 import com.google.appinventor.components.runtime.HorizontalArrangement;
@@ -10,12 +11,12 @@ import com.google.appinventor.components.runtime.Label;
 import com.google.appinventor.components.runtime.PasswordTextBox;
 import com.google.appinventor.components.runtime.TextBox;
 import com.google.appinventor.components.runtime.VerticalArrangement;
-import com.google.appinventor.components.runtime.EventDispatcher;
-import org.json.JSONException;
+import com.google.appinventor.components.runtime.Web;
+
 import org.json.JSONObject;
+import org.json.JSONException;
 public class RegisterActivity extends Form implements HandlesEventDispatching {
-    private
-    VerticalArrangement AccountLabelArrangement, PasswordTextBoxArrangementArrangement;
+    private VerticalArrangement PasswordTextBoxArrangementArrangement;
     HorizontalArrangement EmailArrangement, PasswordTextBoxArrangement, NameArrangement, YOBArrangement, PasswordLabelArrangement;
     Label CreateAccountLabel, NameLabel, PasswordLabel, EmailLabel, YOBLabel, LeftArrangementLabel, RightArrangementLabel;
     TextBox EmailTextBox, NameTextBox, YOBTextBox;
@@ -23,6 +24,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
     PasswordTextBox PasswordTextBox1;
     JSONObject jsonCredentials = new JSONObject();
     Integer AgeLimit = 2004;
+    Web WebAuthenticate, WebAuthenticate1;
 
     protected void $define() {
         /* this next allows the app to use the full screen.
@@ -32,11 +34,11 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         /* Cur seo isteach. Is cuma cén focal atá ann, níl gá leis */
         this.Sizing("Responsive");
 
-        AccountLabelArrangement = new VerticalArrangement(this);
-        AccountLabelArrangement.HeightPercent(100);
-        AccountLabelArrangement.Image("cropped.png");
+        VerticalArrangement accountLabelArrangement = new VerticalArrangement(this);
+        accountLabelArrangement.HeightPercent(100);
+        accountLabelArrangement.Image("cropped.png");
 
-        CreateAccountLabel = new Label(AccountLabelArrangement);
+        CreateAccountLabel = new Label(accountLabelArrangement);
         CreateAccountLabel.Text("CREATE YOUR OWN ACCOUNT AND REGISTER NOW!!");
         CreateAccountLabel.TextColor(COLOR_BLACK);
         CreateAccountLabel.TextAlignment(ALIGNMENT_CENTER);
@@ -47,7 +49,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         CreateAccountLabel.FontBold(true);
         CreateAccountLabel.FontItalic(true);
 
-        EmailArrangement = new HorizontalArrangement(AccountLabelArrangement);
+        EmailArrangement = new HorizontalArrangement(accountLabelArrangement);
 
         EmailLabel = new Label(EmailArrangement);
         EmailLabel.Text("Enter valid email:");
@@ -69,7 +71,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         EmailTextBox.FontTypeface(TYPEFACE_SERIF);
         EmailTextBox.BackgroundColor(Colours.TextBoxColour);
 
-        NameArrangement = new HorizontalArrangement(AccountLabelArrangement);
+        NameArrangement = new HorizontalArrangement(accountLabelArrangement);
 
         NameLabel = new Label(NameArrangement);
         NameLabel.Text("Enter name:");
@@ -91,7 +93,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         NameTextBox.FontTypeface(TYPEFACE_SERIF);
         NameTextBox.BackgroundColor(Colours.TextBoxColour);
 
-        YOBArrangement = new HorizontalArrangement(AccountLabelArrangement);
+        YOBArrangement = new HorizontalArrangement(accountLabelArrangement);
 
         YOBLabel = new Label(YOBArrangement);
         YOBLabel.Text("Enter year of birth: (player must be over 18 to play)");
@@ -114,7 +116,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         YOBTextBox.NumbersOnly(true);
         YOBTextBox.BackgroundColor(Colours.TextBoxColour);
 
-        PasswordLabelArrangement = new HorizontalArrangement(AccountLabelArrangement);
+        PasswordLabelArrangement = new HorizontalArrangement(accountLabelArrangement);
 
         PasswordLabel = new Label(PasswordLabelArrangement);
         PasswordLabel.Text("Enter password: (must be a min. of 8 characters)");
@@ -129,7 +131,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
 
 
         // CRASHES WITH THIS ~~> PasswordTextBoxArrangementArrangement.BackgroundColor(Component.COLOR_BLUE);
-        PasswordTextBoxArrangementArrangement = new VerticalArrangement(AccountLabelArrangement);
+        PasswordTextBoxArrangementArrangement = new VerticalArrangement(accountLabelArrangement);
 
         PasswordTextBoxArrangement = new HorizontalArrangement(PasswordTextBoxArrangementArrangement);
         PasswordTextBoxArrangement.WidthPercent(100);
@@ -178,7 +180,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         BeginButton.Text("JOIN GAME!!");
         BeginButton.TextAlignment(ALIGNMENT_CENTER);
         BeginButton.TextColor(COLOR_BLACK);
-        BeginButton.FontSize(30);
+        BeginButton.FontSize(15);
         BeginButton.BackgroundColor(Colours.ButtonsColour);
         BeginButton.FontTypeface(TYPEFACE_SERIF);
         BeginButton.FontItalic(true);
@@ -191,6 +193,11 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         RightArrangementLabel.HeightPercent(9);
         RightArrangementLabel.WidthPercent(13);
         RightArrangementLabel.FontSize(25);
+
+        WebAuthenticate1 = new Web(this);
+        WebAuthenticate1.Url("https://grassworld.fachtnaroe.net/auth/");
+        WebAuthenticate = new Web(this);
+        WebAuthenticate.Url("https://grassworld.fachtnaroe.net/auth/");
 
         EventDispatcher.registerEventForDelegation(this, formName, "Click");
         EventDispatcher.registerEventForDelegation(this, formName, "Timer");
@@ -207,9 +214,9 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
             return true;
         } else if (eventName.equals("Click")) {
             if (component.equals(BeginButton)) {
-                if (Integer.valueOf(YOBTextBox.Text())<AgeLimit) {
+                if (Integer.parseInt(YOBTextBox.Text()) >AgeLimit) {
                     BeginButton.Text("You are too young to play this game :(");
-                } else if (Integer.valueOf(YOBTextBox.Text()) >AgeLimit) {
+                } else if (Integer.parseInt(YOBTextBox.Text()) <AgeLimit) {
                     if (EmailTextBox.Text().contains("@")) {
                         try {
                             jsonCredentials.put("action", "validate");
@@ -220,16 +227,70 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
                             return false;
                         }
                     }
-                } else {
-                    BeginButton.Text("Enter a more secure password!");
                 }
             }
-        }
-        {
-            BeginButton.Text("Enter a valid email!");
-        }
-        {
-            BeginButton.Text("Please enter a valid year of birth!");
+        } else if (eventName.equals("GotText")) {
+            if (component.equals(WebAuthenticate1)) {
+                String status = params[1].toString();
+                String textOfResponse = (String) params[3];
+                if (textOfResponse.equals("")) {
+                    textOfResponse = status;
+                }
+                if (status.equals("200")) {
+                    try {
+                        JSONObject parser = new JSONObject(textOfResponse);
+                        if (parser.getString("status").equals("OK")) {
+                            String result = parser.getString("user");
+                            if (result.contentEquals("exists")) {
+                            }
+                            else {
+                                //can create user
+                                try {
+                                    jsonCredentials.put("action", "register");
+                                    jsonCredentials.put("user", EmailTextBox.Text());
+                                    jsonCredentials.put("password", PasswordTextBox1.Text());
+                                    jsonCredentials.put("fullname", NameTextBox.Text());
+                                    jsonCredentials.put("yob", YOBTextBox.Text());
+                                    System.err.print("Registering: " + jsonCredentials.toString());
+                                    String msg = jsonCredentials.toString();
+                                    WebAuthenticate1.PostText(msg);
+                                }
+                                catch (Exception e) {
+                                    return false;
+                                }
+                            }
+                        }
+                        else {
+                            BeginButton.Text(parser.getString("status"));
+                        }
+                    }
+                    catch (JSONException e) {
+                        BeginButton.Text("error connecting1 " + status);
+                    }
+                }
+                else {
+                    BeginButton.Text("error connecting2 " + status);
+                }
+                return true;
+            }
+            else if (component.equals(WebAuthenticate)) {
+                String status = params[1].toString();
+                String textOfResponse = (String) params[3];
+                if (status.equals("200")) {
+                    try {
+                        JSONObject parser = new JSONObject(textOfResponse);
+                        if (parser.getString("status").equals("OK")) {
+                            String result = parser.getString("userid");
+                            if (Integer.parseInt(result) > 0) {
+                                return true;
+                            }
+                        }
+                    }
+                    catch (JSONException e) {
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
