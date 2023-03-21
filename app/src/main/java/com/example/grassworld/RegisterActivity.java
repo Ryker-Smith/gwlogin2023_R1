@@ -24,7 +24,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
     PasswordTextBox PasswordTextBox1;
     JSONObject jsonCredentials = new JSONObject();
     Integer AgeLimit = 2004;
-    Web WebAuthenticate, WebAuthenticate1;
+    Web UserExists, CreateUser;
 
     protected void $define() {
         /* this next allows the app to use the full screen.
@@ -194,10 +194,10 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         RightArrangementLabel.WidthPercent(13);
         RightArrangementLabel.FontSize(25);
 
-        WebAuthenticate1 = new Web(this);
-        WebAuthenticate1.Url("https://grassworld.fachtnaroe.net/auth/");
-        WebAuthenticate = new Web(this);
-        WebAuthenticate.Url("https://grassworld.fachtnaroe.net/auth/");
+        CreateUser = new Web(this);
+        CreateUser.Url("https://grassworld.fachtnaroe.net/auth/");
+        UserExists = new Web(this);
+        UserExists.Url("https://grassworld.fachtnaroe.net/auth/");
 
         EventDispatcher.registerEventForDelegation(this, formName, "Click");
         EventDispatcher.registerEventForDelegation(this, formName, "Timer");
@@ -212,36 +212,51 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
         if (eventName.equals("BackPressed")) {
             // this would be a great place to do something useful
             return true;
-        } else if (eventName.equals("Click")) {
+        }
+        else if (eventName.equals("Click")) {
+            dbg("E");
             if (component.equals(BeginButton)) {
                 if (Integer.parseInt(YOBTextBox.Text()) >AgeLimit) {
                     BeginButton.Text("You are too young to play this game :(");
-                } else if (Integer.parseInt(YOBTextBox.Text()) <AgeLimit) {
+                    dbg("A");
+                }
+                else {
+                    dbg("B");
                     if (EmailTextBox.Text().contains("@")) {
+                        dbg("C");
                         try {
                             jsonCredentials.put("action", "validate");
                             jsonCredentials.put("user", EmailTextBox.Text());
                             System.err.print("Sending: " + jsonCredentials.toString());
                             String msg = jsonCredentials.toString();
-                        } catch (Exception e) {
+                            UserExists.PostText(msg);
+                            dbg("F");
+                        }
+                        catch (Exception e) {
+                            dbg("D");
                             return false;
                         }
                     }
                 }
             }
-        } else if (eventName.equals("GotText")) {
-            if (component.equals(WebAuthenticate1)) {
+        }
+        else if (eventName.equals("GotText")) {
+            if (component.equals(UserExists)) {
                 String status = params[1].toString();
                 String textOfResponse = (String) params[3];
+                dbg("K");
                 if (textOfResponse.equals("")) {
                     textOfResponse = status;
                 }
                 if (status.equals("200")) {
                     try {
                         JSONObject parser = new JSONObject(textOfResponse);
+                        dbg("L");
                         if (parser.getString("status").equals("OK")) {
                             String result = parser.getString("user");
                             if (result.contentEquals("exists")) {
+                                //display an error
+                                BeginButton.Text("An account with this email already exists, please try another login or use a different email!");
                             }
                             else {
                                 //can create user
@@ -253,7 +268,7 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
                                     jsonCredentials.put("yob", YOBTextBox.Text());
                                     System.err.print("Registering: " + jsonCredentials.toString());
                                     String msg = jsonCredentials.toString();
-                                    WebAuthenticate1.PostText(msg);
+                                    CreateUser.PostText(msg);
                                 }
                                 catch (Exception e) {
                                     return false;
@@ -270,20 +285,41 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
                 }
                 else {
                     BeginButton.Text("error connecting2 " + status);
+                    try {
+                        jsonCredentials.put("action", "register");
+                        jsonCredentials.put("user", EmailTextBox.Text());
+                        jsonCredentials.put("password", PasswordTextBox1.Text());
+                        jsonCredentials.put("fullname", NameTextBox.Text());
+                        jsonCredentials.put("yob", YOBTextBox.Text());
+                        System.err.print("Registering: " + jsonCredentials.toString());
+                        String msg = jsonCredentials.toString();
+                        CreateUser.PostText(msg);
+                    }
+                    catch (Exception e) {
+                        return false;
+                    }
                 }
                 return true;
             }
-            else if (component.equals(WebAuthenticate)) {
+            else if (component.equals(CreateUser)) {
+                dbg("G");
                 String status = params[1].toString();
                 String textOfResponse = (String) params[3];
                 if (status.equals("200")) {
+                    dbg("H");
                     try {
                         JSONObject parser = new JSONObject(textOfResponse);
                         if (parser.getString("status").equals("OK")) {
                             String result = parser.getString("userid");
+                            dbg("I");
                             if (Integer.parseInt(result) > 0) {
                                 return true;
                             }
+                        }
+                        else {
+                            // error message for user -- backend problem
+                                BeginButton.Text("There is currently a problem with the backend, please try again later");
+                            dbg("J");
                         }
                     }
                     catch (JSONException e) {
@@ -292,7 +328,11 @@ public class RegisterActivity extends Form implements HandlesEventDispatching {
                 }
             }
         }
+        dbg("M");
         return false;
+    }
+    public static void dbg (String debugMsg) {
+        System.err.print( "~~~> " + debugMsg + " <~~~\n\n");
     }
 }
 

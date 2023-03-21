@@ -136,7 +136,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         BeginGameButton.Text("BEGIN GAME!!");
         BeginGameButton.TextAlignment(ALIGNMENT_CENTER);
         BeginGameButton.TextColor(COLOR_BLACK);
-        BeginGameButton.FontSize(30);
+        BeginGameButton.FontSize(15);
         BeginGameButton.BackgroundColor(Colours.ButtonsColour);
         BeginGameButton.FontTypeface(TYPEFACE_SERIF);
         BeginGameButton.FontItalic(true);
