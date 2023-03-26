@@ -26,7 +26,7 @@
 
          Main = new VerticalArrangement(this);
          Main.WidthPercent(100);
-         Main.HeightPercent(65);
+         Main.HeightPercent(55);
 
          WebGame = new WebViewer(Main);
          WebGame.HeightPercent(100);
@@ -61,7 +61,7 @@
          DownArrow.Height(60);
          DownArrow.Width(60);
          DownArrow.Shape(BUTTON_SHAPE_OVAL);
-         DownArrow.FontSize(20);
+         DownArrow.FontSize(18);
          DownArrow.Text("↓");
 
          LeftArrow = new Button(ControlsArrangement);
@@ -71,7 +71,7 @@
          LeftArrow.Height(60);
          LeftArrow.Width(60);
          LeftArrow.Shape(BUTTON_SHAPE_OVAL);
-         LeftArrow.FontSize(20);
+         LeftArrow.FontSize(18);
          LeftArrow.Text("←");
 
          RightArrow = new Button(ControlsArrangement);
@@ -81,7 +81,7 @@
          RightArrow.Height(60);
          RightArrow.Width(60);
          RightArrow.Shape(BUTTON_SHAPE_OVAL);
-         RightArrow.FontSize(20);
+         RightArrow.FontSize(18);
          RightArrow.Text("→");
 
          SleepButton = new Button(ControlsArrangement);
@@ -91,7 +91,7 @@
          SleepButton.Height(60);
          SleepButton.Width(60);
          SleepButton.Shape(BUTTON_SHAPE_OVAL);
-         SleepButton.FontSize(20);
+         SleepButton.FontSize(18);
          SleepButton.Text("\uD83D\uDCA4");
 
          EatButton = new Button(ControlsArrangement);
@@ -101,7 +101,7 @@
          EatButton.Height(60);
          EatButton.Width(60);
          EatButton.Shape(BUTTON_SHAPE_OVAL);
-         EatButton.FontSize(20);
+         EatButton.FontSize(18);
          EatButton.Text("\uD83C\uDF74");
          
          BackpackButton = new Button(ControlsArrangement);
@@ -111,58 +111,58 @@
          BackpackButton.Height(60);
          BackpackButton.Width(60);
          BackpackButton.Shape(BUTTON_SHAPE_OVAL);
-         BackpackButton.FontSize(20);
+         BackpackButton.FontSize(18);
          BackpackButton.Text("\uD83C\uDF92");
 
          FightButton = new Button(ControlsArrangement);
          FightButton.Column(1);
-         FightButton.Row(0);
+         FightButton.Row(3);
          FightButton.BackgroundColor(Component.COLOR_GRAY);
          FightButton.Height(60);
          FightButton.Width(60);
          FightButton.Shape(Component.BUTTON_SHAPE_OVAL);
-         FightButton.FontSize(20);
-         FightButton.Text("\uD83D\uDCA4");
+         FightButton.FontSize(18);
+         FightButton.Text("\uD83D\uDCA2 ");
 
          GolferButton = new Button(ControlsArrangement);
-         GolferButton.Column(1);
+         GolferButton.Column(7);
          GolferButton.Row(0);
          GolferButton.BackgroundColor(Component.COLOR_GRAY);
          GolferButton.Height(60);
          GolferButton.Width(60);
          GolferButton.Shape(Component.BUTTON_SHAPE_OVAL);
-         GolferButton.FontSize(20);
-         GolferButton.Text("\uD83D\uDCA4");
+         GolferButton.FontSize(18);
+         GolferButton.Text("\uD83C\uDFCC\uD83C\uDFFC");
          
          PickUpButton = new Button(ControlsArrangement);
-         PickUpButton.Column(1);
-         PickUpButton.Row(0);
+         PickUpButton.Column(7);
+         PickUpButton.Row(1);
          PickUpButton.BackgroundColor(Component.COLOR_GRAY);
          PickUpButton.Height(60);
          PickUpButton.Width(60);
          PickUpButton.Shape(BUTTON_SHAPE_OVAL);
-         PickUpButton.FontSize(20);
-         PickUpButton.Text("\uD83D\uDCA4");
+         PickUpButton.FontSize(18);
+         PickUpButton.Text("\uD83E\uDEF3");
          
          WakeButton = new Button(ControlsArrangement);
-         WakeButton.Column(1);
-         WakeButton.Row(0);
+         WakeButton.Column(7);
+         WakeButton.Row(2);
          WakeButton.BackgroundColor(Component.COLOR_GRAY);
          WakeButton.Height(60);
          WakeButton.Width(60);
          WakeButton.Shape(Component.BUTTON_SHAPE_OVAL);
-         WakeButton.FontSize(20);
-         WakeButton.Text("\uD83D\uDCA4");
+         WakeButton.FontSize(18);
+         WakeButton.Text("\uD83E\uDD71");
          
          ProjectileButton = new Button(ControlsArrangement);
-         ProjectileButton.Column(1);
-         ProjectileButton.Row(0);
+         ProjectileButton.Column(7);
+         ProjectileButton.Row(3);
          ProjectileButton.BackgroundColor(Component.COLOR_GRAY);
          ProjectileButton.Height(60);
          ProjectileButton.Width(60);
          ProjectileButton.Shape(Component.BUTTON_SHAPE_OVAL);
-         ProjectileButton.FontSize(20);
-         ProjectileButton.Text("\uD83D\uDCA4");
+         ProjectileButton.FontSize(18);
+         ProjectileButton.Text("\uD83C\uDFAF");
          
          Main = new VerticalArrangement(ControlsArrangement);
          Main.WidthPercent(12);
