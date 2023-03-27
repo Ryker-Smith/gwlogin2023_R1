@@ -89,7 +89,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
 
         InsertEmail = new TextBox(EmailArrangement);
         InsertEmail.TextAlignment(ALIGNMENT_CENTER);
-        InsertEmail.Text("");
+        InsertEmail.Text("lola.davern22@student.tcfe.ie");
         InsertEmail.FontSize(25);
         InsertEmail.HeightPercent(8);
         InsertEmail.WidthPercent(48);
@@ -111,7 +111,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         PasswordLabel.FontItalic(true);
 
         LoginPassword = new PasswordTextBox(PasswordArrangement);
-        LoginPassword.Text("");
+        LoginPassword.Text("t3mp0rary");
         LoginPassword.TextColor(COLOR_BLACK);
         LoginPassword.TextAlignment(ALIGNMENT_CENTER);
         LoginPassword.HeightPercent(8);

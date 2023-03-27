@@ -11,7 +11,7 @@
 
  public class GamescreenActivity extends Form implements HandlesEventDispatching {
      private
-     VerticalArrangement Main, ColourTable;
+     VerticalArrangement Main, ColourTable, spacer;
      TableArrangement ControlsArrangement;
      WebViewer WebGame;
      Button UpArrow, DownArrow, LeftArrow, RightArrow, EatButton, SleepButton, BackpackButton, FightButton, GolferButton, PickUpButton, WakeButton, ProjectileButton;
@@ -26,7 +26,7 @@
 
          Main = new VerticalArrangement(this);
          Main.WidthPercent(100);
-         Main.HeightPercent(55);
+         Main.HeightPercent(65);
 
          WebGame = new WebViewer(Main);
          WebGame.HeightPercent(100);
@@ -43,6 +43,12 @@
          ControlsArrangement.Height(LENGTH_FILL_PARENT);
          ControlsArrangement.Columns(8);
          ControlsArrangement.Rows(6);
+
+         spacer = new VerticalArrangement(ControlsArrangement);
+         spacer.Width(30);
+         //spacer.HeightPercent(15);
+         spacer.Column(0);
+         spacer.Row(0);
 
          UpArrow = new Button(ControlsArrangement);
          UpArrow.Column(4);
@@ -142,7 +148,7 @@
          PickUpButton.Width(60);
          PickUpButton.Shape(BUTTON_SHAPE_OVAL);
          PickUpButton.FontSize(18);
-         PickUpButton.Text("\uD83E\uDEF3");
+         PickUpButton.Text("\uD83E\uDD0C");
          
          WakeButton = new Button(ControlsArrangement);
          WakeButton.Column(7);
@@ -164,11 +170,7 @@
          ProjectileButton.FontSize(18);
          ProjectileButton.Text("\uD83C\uDFAF");
          
-         Main = new VerticalArrangement(ControlsArrangement);
-         Main.WidthPercent(12);
-         Main.HeightPercent(15);
-         Main.Column(0);
-         Main.Row(2);
+
 
          EventDispatcher.registerEventForDelegation(this, formName, "Click");
          EventDispatcher.registerEventForDelegation(this, formName, "Timer");
