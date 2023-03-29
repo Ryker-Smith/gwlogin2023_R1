@@ -5,9 +5,10 @@
  import com.google.appinventor.components.runtime.EventDispatcher;
  import com.google.appinventor.components.runtime.Form;
  import com.google.appinventor.components.runtime.HandlesEventDispatching;
- import com.google.appinventor.components.runtime.TableArrangement;
  import com.google.appinventor.components.runtime.VerticalArrangement;
+ import com.google.appinventor.components.runtime.TableArrangement;
  import com.google.appinventor.components.runtime.WebViewer;
+ import com.google.appinventor.components.runtime.Clock;
 
  public class GamescreenActivity extends Form implements HandlesEventDispatching {
      private
@@ -15,6 +16,10 @@
      TableArrangement ControlsArrangement;
      WebViewer WebGame;
      Button UpArrow, DownArrow, LeftArrow, RightArrow, EatButton, SleepButton, BackpackButton, FightButton, GolferButton, PickUpButton, WakeButton, ProjectileButton;
+     GrassViewer GrassViewer;
+     Clock doitagain;
+     String doitagain_key;
+
 
      protected void $define() {
         /* this next allows the app to use the full screen.
@@ -27,6 +32,11 @@
          Main = new VerticalArrangement(this);
          Main.WidthPercent(100);
          Main.HeightPercent(65);
+
+         GrassViewer = new GrassViewer(Main);
+         GrassViewer.WidthPercent(100);
+         GrassViewer.HeightPercent(75);
+         GrassViewer.GoToUrl("https://grassworld.fachtnaroe.net");
 
          WebGame = new WebViewer(Main);
          WebGame.HeightPercent(100);
@@ -169,16 +179,151 @@
          ProjectileButton.Shape(Component.BUTTON_SHAPE_OVAL);
          ProjectileButton.FontSize(18);
          ProjectileButton.Text("\uD83C\uDFAF");
-         
 
+         doitagain = new Clock(Main);
+         doitagain.TimerInterval(100);
+         doitagain.TimerEnabled(false);
 
-         EventDispatcher.registerEventForDelegation(this, formName, "Click");
-         EventDispatcher.registerEventForDelegation(this, formName, "Timer");
-         EventDispatcher.registerEventForDelegation(this, formName, "GotText");
          EventDispatcher.registerEventForDelegation(this, formName, "BackPressed");
-         EventDispatcher.registerEventForDelegation(this, formName, "OtherScreenClosed");
+         EventDispatcher.registerEventForDelegation(this, formName, "Click");
+         EventDispatcher.registerEventForDelegation(this, formName, "WebViewStringChange");
+         EventDispatcher.registerEventForDelegation(this, formName, "thingUpdate");
+         EventDispatcher.registerEventForDelegation(this, formName, "Timer");
+         EventDispatcher.registerEventForDelegation(this, formName, "wvq_fromGame");
+         EventDispatcher.registerEventForDelegation(this, formName, "wvq_fromGame_clear");
+         // for the movement keys
+         EventDispatcher.registerEventForDelegation(this, formName, "TouchDown");
+         EventDispatcher.registerEventForDelegation(this, formName, "TouchUp");
+
+     }
+     public boolean dispatchEvent(Component component, String componentName, String eventName, Object[] params) {
+
+         System.err.print("dispatchEvent: [" + formName + "] [" + component.toString() + "] [" + componentName + "] " + eventName);
+         if (eventName.equals("BackPressed")) {
+             GrassViewer.GoBack();
+             return true;
+         }
+         else if (eventName.equals("WebViewStringChange")) {
+             String msg = GrassViewer.WebViewString();
+             System.err.print("WVS: "+msg);
+             return true;
+         }
+         else if (eventName.equals("thingUpdate")) {
+             String s=GrassViewer.get_thingUpdates();
+             System.err.print("Updates: "+s);
+             return true;
+         }
+         else if (eventName.equals("wvq_fromGame")) {
+             String s=GrassViewer.fromGame();
+             System.err.print("From game: "+s);
+             return true;
+         }
+         else if (eventName.equals("wvq_fromGame_clear")) {
+             System.err.print("Clear from game: ");
+             return true;
+         }
+         else if (eventName.equals("TouchDown")) {
+             if (component.equals(LeftArrow)) {
+                 System.err.print("key_left");
+                 doitagain_key="key_left";
+                 GrassViewer.toGame(GrassViewer.as_JSON(new String[] {"type","key","keyCode",doitagain_key}));
+                 doitagain.TimerEnabled(true);
+                 return true;
+             }
+             else if (component.equals(DownArrow)) {
+                 //
+                 System.err.print("key_down");
+                 doitagain_key="key_down";
+                 GrassViewer.toGame(GrassViewer.as_JSON(new String[] {"type","key","keyCode",doitagain_key}));
+                 doitagain.TimerEnabled(true);
+                 return true;
+             }
+             else if(false) {}
+             else if (component.equals(UpArrow)) {
+                 System.err.print("key_moveup");
+                 doitagain_key="key_up";
+                 GrassViewer.toGame(GrassViewer.as_JSON(new String[] {"type","key","keyCode",doitagain_key}));
+                 doitagain.TimerEnabled(true);
+                 return true;
+             }
+             else if (component.equals(RightArrow)) {
+                 System.err.print("key_moveright");
+                 doitagain_key="key_right";
+                 GrassViewer.toGame(GrassViewer.as_JSON(new String[] {"type","key","keyCode",doitagain_key}));
+                 doitagain.TimerEnabled(true);
+                 return true;
+             }
+             else if (component.equals(EatButton)) {
+                 System.err.print("key_eating");
+                 doitagain_key="key_E";
+                 GrassViewer.toGame(GrassViewer.as_JSON(new String[] {"type","key","keyCode",doitagain_key}));
+                 doitagain.TimerEnabled(true);
+                 return true;
+             }
+             else if (component.equals(GolferButton)) {
+                 System.err.print("key_golf");
+                 doitagain_key="key_G";
+                 GrassViewer.toGame(GrassViewer.as_JSON(new String[] {"type","key","keyCode",doitagain_key}));
+                 doitagain.TimerEnabled(true);
+                 return true;
+             }
+             else if (component.equals(PickUpButton)) {
+                 System.err.print("key_pickup");
+                 doitagain_key="key_P";
+                 GrassViewer.toGame(GrassViewer.as_JSON(new String[] {"type","key","keyCode",doitagain_key}));
+                 doitagain.TimerEnabled(true);
+                 return true;
+             }
+             else if (component.equals(SleepButton)) {
+                 System.err.print("key_sleep");
+                 doitagain_key="key_S";
+                 GrassViewer.toGame(GrassViewer.as_JSON(new String[] {"type","key","keyCode",doitagain_key}));
+                 doitagain.TimerEnabled(true);
+                 return true;
+             }
+             else if (component.equals(WakeButton)) {
+                 System.err.print("key_wake");
+                 doitagain_key="key_W";
+                 GrassViewer.toGame(GrassViewer.as_JSON(new String[] {"type","key","keyCode",doitagain_key}));
+                 doitagain.TimerEnabled(true);
+                 return true;
+             }
+             else if (component.equals(BackpackButton)) {
+                 System.err.print("key_wake");
+                 doitagain_key="key_B";
+                 GrassViewer.toGame(GrassViewer.as_JSON(new String[] {"type","key","keyCode",doitagain_key}));
+                 doitagain.TimerEnabled(true);
+                 return true;
+             }
+             else if (component.equals(ProjectileButton)) {
+                 System.err.print("key_projectile");
+                 doitagain_key="key_K";
+                 GrassViewer.toGame(GrassViewer.as_JSON(new String[] {"type","key","keyCode",doitagain_key}));
+                 doitagain.TimerEnabled(true);
+                 return true;
+             }
+             else if (component.equals(FightButton)) {
+                 System.err.print("key_fight");
+                 doitagain_key="key_F";
+                 GrassViewer.toGame(GrassViewer.as_JSON(new String[] {"type","key","keyCode",doitagain_key}));
+                 doitagain.TimerEnabled(true);
+                 return true;
+             }
+         }
+         else if (eventName.equals("TouchUp")) {
+             doitagain.TimerEnabled(false);
+             return true;
+         }
+         else if (eventName.equals("Timer")) {
+             if (component.equals(doitagain)) {
+                 doitagain.TimerEnabled(false);
+                 String msg=GrassViewer.as_JSON(new String[] {"type","key","keyCode", doitagain_key});
+                 System.err.print(msg);
+                 GrassViewer.toGame(msg);
+                 doitagain.TimerEnabled(true);
+                 return true;
+             }
+         }
+         return false;
      }
  }
-
-// Here be monsters:
-// put unwanted code here, or experimental code awaiting placement
