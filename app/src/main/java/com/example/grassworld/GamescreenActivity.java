@@ -14,7 +14,7 @@
      private
      VerticalArrangement Main, ColourTable, spacer;
      TableArrangement ControlsArrangement;
-     WebViewer WebGame;
+     //WebViewer WebGame;
      Button UpArrow, DownArrow, LeftArrow, RightArrow, EatButton, SleepButton, BackpackButton, FightButton, GolferButton, PickUpButton, WakeButton, ProjectileButton;
      GrassViewer GrassViewer;
      Clock doitagain;
@@ -38,10 +38,10 @@
          GrassViewer.HeightPercent(75);
          GrassViewer.GoToUrl("https://grassworld.fachtnaroe.net");
 
-         WebGame = new WebViewer(Main);
-         WebGame.HeightPercent(100);
-         WebGame.WidthPercent(100);
-         WebGame.GoToUrl("https://grassworld.fachtnaroe.net/");
+         //WebGame = new WebViewer(Main);
+         //WebGame.HeightPercent(100);
+         //WebGame.WidthPercent(100);
+         //WebGame.GoToUrl("https://grassworld.fachtnaroe.net/");
 
          ColourTable = new VerticalArrangement(this);
          ColourTable.Image("grass.png");
